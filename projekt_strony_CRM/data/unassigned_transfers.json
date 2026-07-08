@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "title": "Przelew za FV 2024/04/15",
+    "transferDate": "2025-05-06",
+    "accountNumber": "PL49043655106046072682814233",
+    "amount": 9806.29,
+    "currency": "PLN"
+  },
+  {
+    "id": 2,
+    "title": "Płatność klienta X",
+    "transferDate": "2025-04-19",
+    "accountNumber": "PL11892796174973968581068399",
+    "amount": 5451.79,
+    "currency": "EUR"
+  },
+  {
+    "id": 3,
+    "title": "Zwrot kosztów",
+    "transferDate": "2025-03-31",
+    "accountNumber": "PL42769756038750145674857887",
+    "amount": 8285.38,
+    "currency": "USD"
+  },
+  {
+    "id": 4,
+    "title": "Przelew zaliczkowy",
+    "transferDate": "2025-03-27",
+    "accountNumber": "PL41980273584829985186648010",
+    "amount": 1799.45,
+    "currency": "USD"
+  },
+  {
+    "id": 5,
+    "title": "Nadpłata",
+    "transferDate": "2025-03-20",
+    "accountNumber": "PL40466803126971814851943984",
+    "amount": 3191.10,
+    "currency": "USD"
+  },
+  {
+    "id": 6,
+    "title": "Błąd w numerze",
+    "transferDate": "2025-03-16",
+    "accountNumber": "PL26239484608136335101493098",
+    "amount": 7433.99,
+    "currency": "PLN"
+  },
+  {
+    "id": 7,
+    "title": "Wpłata bez tytułu",
+    "transferDate": "2025-03-07",
+    "accountNumber": "PL53928655903384715217679876",
+    "amount": 1722.45,
+    "currency": "EUR"
+  },
+  {
+    "id": 8,
+    "title": "FV 1032/2024",
+    "transferDate": "2025-03-03",
+    "accountNumber": "PL63778369274341062173179628",
+    "amount": 3713.71,
+    "currency": "PLN"
+  },
+  {
+    "id": 9,
+    "title": "FV 1011/2024",
+    "transferDate": "2025-02-28",
+    "accountNumber": "PL15878830578088917329369392",
+    "amount": 7024.50,
+    "currency": "EUR"
+  },
+  {
+    "id": 10,
+    "title": "Wyrównanie",
+    "transferDate": "2025-02-21",
+    "accountNumber": "PL10126955687213748699611920",
+    "amount": 9601.29,
+    "currency": "PLN"
+  },
+  {
+    "id": 11,
+    "title": "FV 2023/12/05",
+    "transferDate": "2025-02-17",
+    "accountNumber": "PL32406035592926688288448260",
+    "amount": 1824.22,
+    "currency": "USD"
+  },
+  {
+    "id": 12,
+    "title": "Przelew kontrahenta",
+    "transferDate": "2025-02-11",
+    "accountNumber": "PL88796841316122334775685884",
+    "amount": 3845.66,
+    "currency": "EUR"
+  },
+  {
+    "id": 13,
+    "title": "Opłata serwisowa",
+    "transferDate": "2025-02-08",
+    "accountNumber": "PL99284171601438844251404902",
+    "amount": 1094.57,
+    "currency": "PLN"
+  },
+  {
+    "id": 14,
+    "title": "Zwrot środków",
+    "transferDate": "2025-02-01",
+    "accountNumber": "PL48905692748202650929969493",
+    "amount": 2147.32,
+    "currency": "PLN"
+  },
+  {
+    "id": 15,
+    "title": "Reklamacja",
+    "transferDate": "2025-01-30",
+    "accountNumber": "PL19823111151943782910627010",
+    "amount": 7830.15,
+    "currency": "USD"
+  }
+]

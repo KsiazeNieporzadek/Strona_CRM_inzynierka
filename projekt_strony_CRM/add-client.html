@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>CRM - Dodaj Klienta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen p-6">
+
+  <nav class="bg-gray-800 shadow mb-6 p-4 flex justify-between items-center rounded-xl">
+    <div class="text-xl font-semibold text-white">CRM System</div>
+    <div class="space-x-2">
+      <a href="dashboard.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Dashboard</a>
+      <a href="clients.html" class="px-4 py-2 rounded-xl bg-blue-800 text-white hover:bg-blue-700 transition">Klienci</a>
+      <a href="finance.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Finanse</a>
+      <a href="vehicles.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Samochody</a>
+    </div>
+  </nav>
+
+  <h1 class="text-3xl font-bold mb-6 text-white">Dodaj nowego klienta</h1>
+
+  <form id="addClientForm" class="bg-gray-800 p-8 rounded-xl shadow-lg max-w-2xl mx-auto space-y-6">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">Imię <span class="text-red-500">*</span></label>
+        <input type="text" id="firstName" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <p id="error-firstName" class="text-red-500 text-xs mt-1 hidden">To pole jest wymagane.</p>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">Nazwisko <span class="text-red-500">*</span></label>
+        <input type="text" id="lastName" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <p id="error-lastName" class="text-red-500 text-xs mt-1 hidden">To pole jest wymagane.</p>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">Status umowy <span class="text-red-500">*</span></label>
+        <select id="status" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+          <option value="">Wybierz status...</option>
+          <option value="Aktywny">Aktywny</option>
+          <option value="Lejek sprzedażowy">Lejek sprzedażowy</option>
+          <option value="Windykacja">Windykacja</option>
+        </select>
+        <p id="error-status" class="text-red-500 text-xs mt-1 hidden">Wybierz status klienta.</p>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">PESEL <span class="text-red-500">*</span></label>
+        <input type="text" id="pesel" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <p id="error-pesel" class="text-red-500 text-xs mt-1 hidden">PESEL musi składać się dokładnie z 11 cyfr.</p>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">NIP</label>
+        <input type="text" id="nip" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <p id="error-nip" class="text-red-500 text-xs mt-1 hidden">NIP musi składać się z 10 cyfr.</p>
+      </div>
+
+      <div>
+        <label class="block text-gray-300 font-medium mb-2">Email <span class="text-red-500">*</span></label>
+        <input type="email" id="email" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+        <p id="error-email" class="text-red-500 text-xs mt-1 hidden">Podaj poprawny adres e-mail.</p>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-gray-300 font-medium mb-2">Adres</label>
+      <input type="text" id="address" class="w-full bg-gray-700 text-white border border-gray-600 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none">
+    </div>
+
+    <div id="successMessage" class="hidden bg-green-600 text-white px-4 py-3 rounded-xl text-center font-medium">
+      Klient został pomyślnie dodany! Trwa przekierowanie...
+    </div>
+
+    <div class="flex gap-4 justify-end mt-4">
+      <a href="clients.html" class="px-6 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-500 transition">Anuluj</a>
+      <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">Zapisz klienta</button>
+    </div>
+  </form>
+
+  <script src="js/add-client.js"></script>
+</body>
+</html>

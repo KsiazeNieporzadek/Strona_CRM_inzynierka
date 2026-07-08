@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM - Finanse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-900 min-hS-screen p-6 text-white">
+  <nav class="bg-gray-800 shadow mb-6 p-4 flex justify-between items-center rounded-xl">
+    <div class="text-xl font-semibold text-white">CRM System</div>
+    <div class="space-x-2">
+      <a href="dashboard.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Dashboard</a>
+      <a href="clients.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Klienci</a>
+      <a href="finance.html" class="px-4 py-2 rounded-xl bg-blue-800 text-white hover:bg-blue-300 transition">Finanse</a>
+      <a href="vehicles.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Samochody</a>
+    </div>
+  </nav>
+
+<div class="flex justify-between items-center mb-6">
+  <div class="bg-gray-800 rounded-xl p-4 flex space-x-4 text-center">
+    <a href="finance.html" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl">Wpłaty</a>
+    <a href="unassigned.html" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-xl">Nieprzypisane wpłaty</a>
+    <a href="contracts-finance.html" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-xl">Umowy</a>
+  </div>
+
+  <button id="exportCsv" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">
+    Eksportuj CSV
+  </button>
+</div>
+
+
+<div class="overflow-x-auto shadow-lg rounded-xl">
+  
+  <table class="min-w-full text-left text-sm text-gray-800">
+    <thead class="uppercase">
+      <tr>
+        <th class="px-6 py-3">ID wpłaty</th>
+        <th class="px-6 py-3">Nazwa faktury</th>
+        <th class="px-6 py-3">Wysokość wpłaty</th>
+        <th class="px-6 py-3">Dni opóźnienia</th>
+      </tr>
+    </thead>
+    <tbody id="finance-table-body">
+      <!-- dane z JS -->
+    </tbody>
+  </table>
+</div>
+<div class="flex justify-between items-center mt-4">
+  <button id="prevPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Poprzednia</button>
+  <span id="pageInfo" class="text-gray-400"></span>
+  <button id="nextPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Następna</button>
+</div>
+
+
+
+  <script src="js/finance.js"></script>
+</body>
+</html>

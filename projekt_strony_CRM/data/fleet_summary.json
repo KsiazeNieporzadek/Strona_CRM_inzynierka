@@ -1,0 +1,15 @@
+{
+  "total": 50,
+  "averageAge": 4.2,
+  "available": 12,
+  "topModels": [
+    { "model": "Toyota Corolla", "count": 10 },
+    { "model": "Ford Focus", "count": 8 },
+    { "model": "VW Golf", "count": 7 }
+  ],
+  "longestFree": [
+    { "regNumber": "KR12345", "daysFree": 45 },
+    { "regNumber": "WA67890", "daysFree": 40 },
+    { "regNumber": "PO54321", "daysFree": 38 }
+  ]
+}

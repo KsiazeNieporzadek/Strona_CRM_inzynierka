@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj pojazd</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-900 min-h-screen p-6 text-white">
+
+  <nav class="bg-gray-800 shadow mb-6 p-4 flex justify-between items-center rounded-xl">
+    <div class="text-xl font-semibold text-white">CRM System</div>
+    <div class="space-x-2">
+      <a href="dashboard.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700">Dashboard</a>
+      <a href="clients.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700">Klienci</a>
+      <a href="finance.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700">Finanse</a>
+      <a href="vehicles.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700">Samochody</a>
+    </div>
+  </nav>
+
+  <h1 class="text-3xl font-bold mb-6">Dodaj Nowy Pojazd</h1>
+
+  <form id="addVehicleForm" class="bg-gray-800 max-w-3xl mx-auto shadow rounded-xl p-8 space-y-6">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="brand" class="block text-sm text-gray-300 mb-1">Marka</label>
+        <input type="text" id="brand" placeholder="Toyota" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+      <div>
+        <label for="model" class="block text-sm text-gray-300 mb-1">Model</label>
+        <input type="text" id="model" placeholder="Corolla" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+    </div>
+
+    <div>
+      <label for="insuranceName" class="block text-sm text-gray-300 mb-1">Nazwa ubezpieczyciela</label>
+      <input type="text" id="insuranceName" placeholder="PZU" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="productionDate" class="block text-sm text-gray-300 mb-1">Data produkcji</label>
+        <input type="date" id="productionDate" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+      <div>
+        <label for="insuranceDate" class="block text-sm text-gray-300 mb-1">Ubezpieczony do</label>
+        <input type="date" id="insuranceDate" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="vin" class="block text-sm text-gray-300 mb-1">Numer VIN</label>
+        <input type="text" id="vin" placeholder="WVWZZZ1JZXW000000" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+      <div>
+        <label for="regNumber" class="block text-sm text-gray-300 mb-1">Numer rejestracyjny</label>
+        <input type="text" id="regNumber" placeholder="WI 1234X" class="w-full p-3 rounded-lg bg-gray-700 text-white">
+      </div>
+    </div>
+
+    <div class="flex justify-end pt-4">
+      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-3 rounded-lg transition">
+        Zapisz pojazd
+      </button>
+    </div>
+  </form>
+
+  <script src="js/add-vehicle.js"></script>
+</body>
+</html>

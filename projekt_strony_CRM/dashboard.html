@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM - Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-900 min-h-screen p-6">
+  <nav class="bg-gray-800 shadow mb-6 p-4 flex justify-between items-center rounded-xl">
+    <div class="text-xl font-semibold text-white">CRM System</div>
+    <div class="space-x-2">
+      <a href="dashboard.html" class="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">Dashboard</a>
+      <a href="clients.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Klienci</a>
+      <a href="finance.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Finanse</a>
+      <a href="vehicles.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Samochody</a>
+    </div>
+  </nav>
+
+  <h1 class="text-3xl font-bold mb-6 text-gray-200">Panel Analityczny</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div class="bg-tile shadow rounded-xl p-6" id="roiCard">
+      <p class="text-gray-400">Ładowanie danych ROI...</p>
+    </div>
+    <div class="bg-tile shadow rounded-xl p-6">
+      <h2 class="text-lg font-bold mb-4 text-gray-200">Przychody brutto</h2>
+      <canvas id="revenueChart" height="200"></canvas>
+    </div>
+    <div class="bg-tile shadow rounded-xl p-6" id="topClientsCard">
+      <p class="text-gray-400">Ładowanie danych o klientach...</p>
+    </div>
+    <div class="bg-tile shadow rounded-xl p-6" id="paymentDelaysCard">
+      <p class="text-gray-400">Ładowanie danych o opóźnieniach...</p>
+    </div>
+    <div class="bg-tile shadow rounded-xl p-6" id="fleetCard">
+      <p class="text-gray-400">Ładowanie danych o flocie...</p>
+    </div>
+    <div class="bg-tile shadow rounded-xl p-6">
+      <h2 class="text-lg font-bold mb-4 text-gray-200">Ilość aktywnych leasingów w miastach</h2>
+      <canvas id="industryChart" height="200"></canvas>
+    </div>
+    
+    
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

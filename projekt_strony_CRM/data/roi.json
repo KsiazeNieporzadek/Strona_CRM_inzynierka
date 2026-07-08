@@ -1,0 +1,7 @@
+{
+  "average": 22.5,
+  "trend": {
+    "months": ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec"],
+    "roiValues": [18, 20, 21, 25, 26, 27]
+  }
+}

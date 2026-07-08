@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRM - Samochody</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-900 min-h-screen p-6">
+  <nav class="bg-gray-800 shadow mb-6 p-4 flex justify-between items-center rounded-xl">
+    <div class="text-xl font-semibold text-white">CRM System</div>
+    <div class="space-x-2">
+      <a href="dashboard.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Dashboard</a>
+      <a href="clients.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Klienci</a>
+      <a href="finance.html" class="px-4 py-2 rounded-xl text-white hover:bg-gray-700 transition">Finanse</a>
+      <a href="vehicles.html" class="px-4 py-2 rounded-xl bg-blue-800 text-white hover:bg-blue-300 transition">Samochody</a>
+    </div>
+  </nav>
+  
+
+  <h1 class="text-3xl font-bold mb-4">Samochody</h1>
+
+  <div class="mb-4 flex gap-4 flex-wrap">
+    <input type="text" id="search" placeholder="Wyszukaj markę, model lub rejestrację" class="p-3 border rounded-xl flex-grow min-w-[200px]">
+    <button id="exportCsv" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">
+      Eksportuj do CSV
+    </button>
+    <a href="add-vehicle.html" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 flex items-center justify-center">
+      Dodaj auto
+    </a>
+  </div>
+
+  <div id="result-count" class="mb-4 text-gray-700">Liczba wyników: 0</div>
+
+  <div class="overflow-x-auto shadow-lg rounded-xl">
+    <table class="min-w-full text-left text-sm text-gray-800">
+      <thead class="uppercase">
+        <tr>
+          <th class="px-6 py-3">ID</th>
+          <th class="px-6 py-3">Marka</th>
+          <th class="px-6 py-3">Model</th>
+          <th class="px-6 py-3">Przypisany klient</th>
+          <th class="px-6 py-3">Numer rejestracyjny</th>
+          <th class="px-6 py-3 sortable" data-sort="insurance">Ubezpieczenie ⬍</th>
+          <th class="px-6 py-3">VIN</th>
+          <th class="px-6 py-3 sortable" data-sort="production">Data produkcji ⬍</th>
+        </tr>
+      </thead>
+      <tbody id="vehicles-table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 flex justify-between items-center">
+    <button id="prevPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Poprzednia</button>
+    <span id="pageInfo" class="text-gray-700"></span>
+    <button id="nextPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Następna</button>
+  </div>
+
+  <script src="js/vehicles.js"></script>
+</body>
+</html>

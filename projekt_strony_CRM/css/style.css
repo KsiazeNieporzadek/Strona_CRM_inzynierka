@@ -1,0 +1,123 @@
+/* Ogólne tło i tekst */
+body {
+  background-color: #1f2937; /* Tailwind gray-800 */
+  color: #f9fafb;           /* Tailwind gray-100 */
+}
+
+/* Nawigacja */
+nav {
+  background-color: #111827; /* Tailwind gray-900 */
+}
+
+nav a {
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  color: #f9fafb;
+  text-decoration: none;
+}
+
+nav a.active,
+nav a:hover {
+  background-color: #2563eb; /* Tailwind blue-600 */
+}
+
+nav a:not(.active):hover {
+  background-color: #374151; /* Tailwind gray-700 */
+}
+
+/* Tabele */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  color: #f9fafb;           /* jasny tekst */
+}
+
+thead {
+  background-color: #2d3748; /* gray-700 */
+  color: #e5e7eb;
+}
+
+tbody tr {
+  border-bottom: 1px solid #4b5563; /* gray-600 */
+  background-color: #1f2937;        /* gray-800 */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #27303f;        /* nieco jaśniejsze co drugi wiersz */
+}
+
+.form-error {
+  font-size: 0.875rem;
+  color: #e0597f;
+}
+.border-error {
+  border: 2px solid #e0597f !important;
+}
+
+tbody tr:hover {
+  background-color: #1a202c;        /* gray-900 → ciemniejszy na hover */
+}
+
+/* Rekordy z opóźnieniami — subtelna ramka */
+.bg-red-100, .bg-red-200 {
+  background-color: transparent !important;
+  border: 2px solid #e0597f !important; /* amber-400 */
+  border-radius: 0.5rem;
+}
+
+/* Pola wejściowe, przyciski */
+input, button, select, textarea {
+  background-color: #374151;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  outline: none;
+}
+.bg-tile {
+  background-color: #282f3a; /* Tailwind gray-700 */
+  color: #e4e7eb;            /* Tailwind gray-300 (tekst) */
+}
+
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-2.rounded-xl {
+  border-color: #e0597f !important;
+}
+
+input::placeholder {
+  color: #9ca3af; /* Tailwind gray-400 */
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+button, .action-btn {
+  transition: all 0.3s ease;
+}
+
+/* Sortowalne nagłówki */
+.sortable {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sortable:hover {
+  text-decoration: underline;
+  color: #93c5fd; /* Tailwind blue-300 */
+}
+
+/* Liczniki, paginacja */
+#result-count, #pageInfo {
+  color: #d1d5db; /* Tailwind gray-300 */
+}

@@ -1,0 +1,9 @@
+{
+  "onTime": 75,
+  "late": 25,
+  "averageDelayDays": 5.3,
+  "trend": {
+    "months": ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec"],
+    "lateCounts": [10, 12, 8, 15, 20, 25]
+  }
+}
