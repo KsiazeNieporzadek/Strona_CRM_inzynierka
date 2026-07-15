@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pesel = document.getElementById("pesel").value.trim();
     const nip = document.getElementById("nip").value.trim();
     const email = document.getElementById("email").value.trim();
+    const postalCode = document.getElementById("postalCode").value.trim();
 
     // WALIDACJA (Prawdziwe komunikaty błędu)
     // 1. Imię i Nazwisko nie mogą być puste
@@ -53,6 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
       // Jeśli puste, ukrywamy błąd (bo NIP nie ma gwiazdki, nie jest wymagany)
       document.getElementById("error-nip").classList.add("hidden");
       document.getElementById("nip").classList.remove("border-red-500");
+    }
+
+    // 6. Kod pocztowy jest opcjonalny, ale jeśli jest wpisany, musi mieć format XX-XXX
+    if (postalCode.length > 0) {
+      const postalCodeRegex = /^[0-9]{2}-[0-9]{3}$/;
+      checkField("postalCode", postalCodeRegex.test(postalCode));
+    } else {
+      // Jeśli puste, ukrywamy błąd (pole nie jest wymagane)
+      document.getElementById("error-postalCode").classList.add("hidden");
+      document.getElementById("postalCode").classList.remove("border-red-500");
     }
 
     // Jeśli wszystko jest poprawne - symulujemy zapis
