@@ -1,5 +1,3 @@
-
-Unassigned · JS
 document.addEventListener("DOMContentLoaded", () => {
   let data = [];
 
