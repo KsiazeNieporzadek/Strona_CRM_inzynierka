@@ -1,3 +1,5 @@
+
+Unassigned · JS
 document.addEventListener("DOMContentLoaded", () => {
   let data = [];
 
@@ -52,9 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (clientId) {
           record.clientId = clientId;
 
+          // Zmapuj rekord na strukturę oczekiwaną przez widok "Wpłaty" (finance.js).
+          // Rekord z nieprzypisanych wpłat opisuje przelew bankowy (title, transferDate,
+          // accountNumber, currency), a nie wpłatę powiązaną z fakturą (invoice, delayDays) -
+          // bez tego mapowania pola "invoice" i "delayDays" były po stronie finance.js
+          // niezdefiniowane, przez co przypisana wpłata traciła nazwę faktury i liczbę dni
+          // opóźnienia (zob. TC-08).
+          const mappedRecord = {
+            id: record.id,
+            invoice: record.title,
+            amount: record.amount,
+            delayDays: 0,
+            clientId: record.clientId
+          };
+
           // Przenieś do przypisanych w localStorage
           const assigned = JSON.parse(localStorage.getItem("assignedPayments") || "[]");
-          assigned.push(record);
+          assigned.push(mappedRecord);
           localStorage.setItem("assignedPayments", JSON.stringify(assigned));
 
           // Usuń z nieprzypisanych
