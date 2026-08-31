@@ -2,19 +2,78 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctxRevenue = document.getElementById("revenueChart").getContext("2d");
   const ctxIndustry = document.getElementById("industryChart").getContext("2d");
 
-fetch('data/revenue.json')
-  .then(response => response.json())
-  .then(revenueData => {
+  // ---- FE10.2: widoczność paneli i układ dashboardu ----
+  const TILE_IDS = ["roiCard", "revenueCard", "topClientsCard", "paymentDelaysCard", "fleetCard", "industryCard"];
+
+  function loadDashboardSettings() {
+    try {
+      return JSON.parse(localStorage.getItem("dashboardSettings") || "{}");
+    } catch (e) {
+      return {};
+    }
+  }
+  function saveDashboardSettings(settings) {
+    localStorage.setItem("dashboardSettings", JSON.stringify(settings));
+  }
+
+  const settings = loadDashboardSettings();
+  const visibleTiles = settings.visibleTiles || {};
+  const layout = settings.layout || "3";
+
+  document.querySelectorAll(".tile-toggle").forEach(checkbox => {
+    const tileId = checkbox.dataset.tile;
+    const isVisible = visibleTiles[tileId] !== false; // domyślnie widoczny
+    checkbox.checked = isVisible;
+    document.getElementById(tileId).classList.toggle("hidden", !isVisible);
+
+    checkbox.addEventListener("change", () => {
+      document.getElementById(tileId).classList.toggle("hidden", !checkbox.checked);
+      const current = loadDashboardSettings();
+      current.visibleTiles = current.visibleTiles || {};
+      current.visibleTiles[tileId] = checkbox.checked;
+      saveDashboardSettings(current);
+    });
+  });
+
+  const dashboardGrid = document.getElementById("dashboardGrid");
+  const layoutSelect = document.getElementById("layoutSelect");
+  const LAYOUT_CLASSES = {
+    "1": ["grid-cols-1"],
+    "2": ["grid-cols-1", "md:grid-cols-2"],
+    "3": ["grid-cols-1", "md:grid-cols-2", "xl:grid-cols-3"]
+  };
+  function applyLayout(value) {
+    dashboardGrid.classList.remove("grid-cols-1", "md:grid-cols-2", "xl:grid-cols-3");
+    LAYOUT_CLASSES[value].forEach(c => dashboardGrid.classList.add(c));
+  }
+  layoutSelect.value = layout;
+  applyLayout(layout);
+  layoutSelect.addEventListener("change", () => {
+    applyLayout(layoutSelect.value);
+    const current = loadDashboardSettings();
+    current.layout = layoutSelect.value;
+    saveDashboardSettings(current);
+  });
+
+  // ---- FE10.3: filtrowanie danych wg przedziału czasu i innych kryteriów ----
+  let revenueChartInstance = null;
+  let fullRevenueData = null;
+
+  function renderRevenueChart(months, values) {
     const chartData = {
-      labels: revenueData.months,
+      labels: months,
       datasets: [{
         label: 'Przychody brutto',
-        data: revenueData.values,
+        data: values,
         backgroundColor: '#60a5fa' // blue-400
       }]
     };
-
-    new Chart(ctxRevenue, {
+    if (revenueChartInstance) {
+      revenueChartInstance.data = chartData;
+      revenueChartInstance.update();
+      return;
+    }
+    revenueChartInstance = new Chart(ctxRevenue, {
       type: 'bar',
       data: chartData,
       options: {
@@ -27,22 +86,55 @@ fetch('data/revenue.json')
         }
       }
     });
+  }
+
+  function applyRevenueRangeFilter() {
+    const fromIdx = parseInt(document.getElementById("revenueFromMonth").value, 10);
+    const toIdx = parseInt(document.getElementById("revenueToMonth").value, 10);
+    if (!fullRevenueData || isNaN(fromIdx) || isNaN(toIdx) || fromIdx > toIdx) return;
+    const months = fullRevenueData.months.slice(fromIdx, toIdx + 1);
+    const values = fullRevenueData.values.slice(fromIdx, toIdx + 1);
+    renderRevenueChart(months, values);
+  }
+
+fetch('data/revenue.json')
+  .then(response => response.json())
+  .then(revenueData => {
+    fullRevenueData = revenueData;
+
+    const fromSelect = document.getElementById("revenueFromMonth");
+    const toSelect = document.getElementById("revenueToMonth");
+    revenueData.months.forEach((month, idx) => {
+      fromSelect.add(new Option(month, idx));
+      toSelect.add(new Option(month, idx));
+    });
+    toSelect.value = String(revenueData.months.length - 1);
+
+    fromSelect.addEventListener("change", applyRevenueRangeFilter);
+    toSelect.addEventListener("change", applyRevenueRangeFilter);
+
+    renderRevenueChart(revenueData.months, revenueData.values);
   });
 
 
-fetch('data/industry_revenue.json')
-  .then(response => response.json())
-  .then(cityData => {
+  let industryChartInstance = null;
+  let fullCityData = null;
+
+  function renderIndustryChart(cities, values) {
     const chartData = {
-      labels: cityData.cities,
+      labels: cities,
       datasets: [{
         label: 'Aktywne leasingi',
-        data: cityData.values,
+        data: values,
         backgroundColor: '#3b82f6'
       }]
     };
-
-    new Chart(ctxIndustry, {
+    if (industryChartInstance) {
+      industryChartInstance.data = chartData;
+      industryChartInstance.update();
+      return;
+    }
+    industryChartInstance = new Chart(ctxIndustry, {
       type: 'bar',
       data: chartData,
       options: {
@@ -56,6 +148,38 @@ fetch('data/industry_revenue.json')
         }
       }
     });
+  }
+
+  function applyCityFilter() {
+    const checked = Array.from(document.querySelectorAll(".city-toggle:checked")).map(cb => cb.value);
+    if (!fullCityData) return;
+    const cities = [];
+    const values = [];
+    fullCityData.cities.forEach((city, idx) => {
+      if (checked.includes(city)) {
+        cities.push(city);
+        values.push(fullCityData.values[idx]);
+      }
+    });
+    renderIndustryChart(cities, values);
+  }
+
+fetch('data/industry_revenue.json')
+  .then(response => response.json())
+  .then(cityData => {
+    fullCityData = cityData;
+    const cityFilterEl = document.getElementById("cityFilter");
+    cityData.cities.forEach(city => {
+      const label = document.createElement("label");
+      label.className = "flex items-center gap-1";
+      label.innerHTML = `<input type="checkbox" class="city-toggle" value="${city}" checked> ${city}`;
+      cityFilterEl.appendChild(label);
+    });
+    cityFilterEl.querySelectorAll(".city-toggle").forEach(cb => {
+      cb.addEventListener("change", applyCityFilter);
+    });
+
+    renderIndustryChart(cityData.cities, cityData.values);
   });
 
 
