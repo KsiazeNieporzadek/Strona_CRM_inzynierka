@@ -1,6 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("addClientForm");
 
+  // FEP06: ostrzeżenie przed opuszczeniem formularza z niezapisanymi zmianami.
+  let formIsDirty = false;
+  let formSubmittedSuccessfully = false;
+
+  form.addEventListener("input", () => {
+    formIsDirty = true;
+  });
+
+  window.addEventListener("beforeunload", (e) => {
+    if (formIsDirty && !formSubmittedSuccessfully) {
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+  });
+
   form.addEventListener("submit", (e) => {
     e.preventDefault(); // Zatrzymanie domyślnego wysyłania formularza
 
@@ -70,7 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isValid) {
       const successMessage = document.getElementById("successMessage");
       successMessage.classList.remove("hidden");
-      
+
+      // Formularz zapisany (symulacja) - nie ostrzegaj już przed przekierowaniem.
+      formSubmittedSuccessfully = true;
+
       // Ukrycie przycisków, by zapobiec podwójnemu kliknięciu
       form.querySelector("button[type='submit']").disabled = true;
 
