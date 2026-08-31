@@ -9,6 +9,62 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageInfo = document.getElementById("pageInfo");
   const exportBtn = document.getElementById("exportCsv");
 
+  // ---- FE06.1: harmonogram spłat (terminy, kwoty, statusy poszczególnych rat) ----
+  const scheduleModal = document.getElementById("scheduleModal");
+  const scheduleModalTitle = document.getElementById("scheduleModalTitle");
+  const scheduleTableBody = document.getElementById("scheduleTableBody");
+  const closeScheduleModalBtn = document.getElementById("closeScheduleModal");
+
+  // Umowa przechowuje tylko zagregowane dane (rata, czas trwania, kwota do spłaty),
+  // a nie listę poszczególnych rat. Harmonogram budujemy więc na podstawie tych pól:
+  // liczba rat = liczba miesięcy z "duration", terminy = kolejne miesiące od startDate,
+  // a liczbę już opłaconych/pozostałych rat wyliczamy z relacji remainingAmount / monthlyInstallment.
+  function computeInstallmentSchedule(contract) {
+    const monthsMatch = String(contract.duration).match(/\d+/);
+    const monthsCount = monthsMatch ? parseInt(monthsMatch[0], 10) : 0;
+    const start = new Date(contract.startDate);
+    const monthly = Number(contract.monthlyInstallment) || 0;
+
+    let unpaidCount = 0;
+    if (monthly > 0) {
+      unpaidCount = Math.round(Number(contract.remainingAmount) / monthly);
+      unpaidCount = Math.min(monthsCount, Math.max(0, unpaidCount));
+    }
+
+    const installments = [];
+    for (let i = 1; i <= monthsCount; i++) {
+      const due = new Date(start.getFullYear(), start.getMonth() + i, start.getDate());
+      const isUnpaid = i > (monthsCount - unpaidCount);
+      installments.push({
+        number: i,
+        dueDate: due.toISOString().slice(0, 10),
+        amount: monthly,
+        status: isUnpaid ? "Do zapłaty" : "Opłacona"
+      });
+    }
+    return installments;
+  }
+
+  function openScheduleModal(contract) {
+    scheduleModalTitle.textContent = `Harmonogram spłat — umowa ${contract.contractId} (${contract.clientName})`;
+    const schedule = computeInstallmentSchedule(contract);
+    scheduleTableBody.innerHTML = schedule.length
+      ? schedule.map(row => `
+          <tr class="border-b border-gray-700">
+            <td class="px-3 py-2">${row.number}</td>
+            <td class="px-3 py-2">${row.dueDate}</td>
+            <td class="px-3 py-2">${row.amount.toLocaleString()} PLN</td>
+            <td class="px-3 py-2 ${row.status === "Do zapłaty" ? "text-red-400" : "text-green-400"}">${row.status}</td>
+          </tr>
+        `).join("")
+      : `<tr><td colspan="4" class="px-3 py-2 text-gray-400">Brak danych do zbudowania harmonogramu.</td></tr>`;
+    scheduleModal.classList.remove("hidden");
+  }
+
+  closeScheduleModalBtn.addEventListener("click", () => {
+    scheduleModal.classList.add("hidden");
+  });
+
   fetch("data/contracts-finance.json")
     .then(response => response.json())
     .then(json => {
@@ -39,8 +95,20 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="px-6 py-4">${item.contractValue}</td>
         <td class="px-6 py-4">${item.roi}</td>
         <td class="px-6 py-4">${item.remainingAmount}</td>
+        <td class="px-6 py-4">
+          <button class="schedule-btn px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-xs" data-id="${item.contractId}">
+            Harmonogram
+          </button>
+        </td>
       `;
       tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll(".schedule-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const contract = data.find(c => c.contractId === btn.dataset.id);
+        if (contract) openScheduleModal(contract);
+      });
     });
 
     pageInfo.textContent = `Strona ${currentPage} z ${totalPages}`;
