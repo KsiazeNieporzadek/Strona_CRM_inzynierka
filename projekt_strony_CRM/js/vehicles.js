@@ -13,6 +13,69 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageInfo = document.getElementById("pageInfo");
   const exportBtn = document.getElementById("exportCsv");
 
+  // ---- FE08.3: historia serwisowa pojazdu ----
+  const SERVICE_HISTORY_KEY = "vehicleServiceHistory";
+  const serviceModal = document.getElementById("serviceModal");
+  const serviceModalTitle = document.getElementById("serviceModalTitle");
+  const serviceHistoryList = document.getElementById("serviceHistoryList");
+  const serviceEntryDate = document.getElementById("serviceEntryDate");
+  const serviceEntryDesc = document.getElementById("serviceEntryDesc");
+  const addServiceEntryBtn = document.getElementById("addServiceEntryBtn");
+  const closeServiceModalBtn = document.getElementById("closeServiceModal");
+  let currentServiceVehicleId = null;
+
+  function getAllServiceHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(SERVICE_HISTORY_KEY) || "{}");
+    } catch (e) {
+      return {};
+    }
+  }
+  function saveAllServiceHistory(all) {
+    localStorage.setItem(SERVICE_HISTORY_KEY, JSON.stringify(all));
+  }
+
+  function renderServiceHistoryList(vehicleId) {
+    const all = getAllServiceHistory();
+    const entries = (all[vehicleId] || []).slice().sort((a, b) => a.date < b.date ? 1 : -1);
+    serviceHistoryList.innerHTML = entries.length
+      ? entries.map(e => `<li>${e.date} — ${e.description}</li>`).join("")
+      : `<li class="text-gray-400 list-none">Brak wpisów w historii serwisowej.</li>`;
+  }
+
+  function openServiceModal(car) {
+    currentServiceVehicleId = car.id;
+    serviceModalTitle.textContent = `Historia serwisowa — ${car.brand} ${car.model} (${car.regNumber})`;
+    serviceEntryDate.value = "";
+    serviceEntryDesc.value = "";
+    renderServiceHistoryList(car.id);
+    serviceModal.classList.remove("hidden");
+  }
+
+  function closeServiceModal() {
+    serviceModal.classList.add("hidden");
+    currentServiceVehicleId = null;
+  }
+
+  closeServiceModalBtn.addEventListener("click", closeServiceModal);
+
+  addServiceEntryBtn.addEventListener("click", () => {
+    if (currentServiceVehicleId === null) return;
+    const date = serviceEntryDate.value;
+    const description = serviceEntryDesc.value.trim();
+    if (!date || !description) {
+      alert("Podaj datę oraz opis wykonanej czynności serwisowej.");
+      return;
+    }
+    const all = getAllServiceHistory();
+    if (!all[currentServiceVehicleId]) all[currentServiceVehicleId] = [];
+    all[currentServiceVehicleId].push({ date, description });
+    saveAllServiceHistory(all);
+    serviceEntryDate.value = "";
+    serviceEntryDesc.value = "";
+    renderServiceHistoryList(currentServiceVehicleId);
+  });
+
   function fetchData() {
     fetch("data/vehicles.json")
       .then(response => response.json())
@@ -48,8 +111,20 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="px-6 py-4">${car.insurance}</td>
         <td class="px-6 py-4">${car.vin}</td>
         <td class="px-6 py-4">${car.production}</td>
+        <td class="px-6 py-4">
+          <button class="service-history-btn px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-xs" data-id="${car.id}">
+            Historia
+          </button>
+        </td>
       `;
       tbody.appendChild(row);
+    });
+
+    tbody.querySelectorAll(".service-history-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const car = data.find(c => String(c.id) === String(btn.dataset.id));
+        if (car) openServiceModal(car);
+      });
     });
 
     resultCount.textContent = `Liczba wyników: ${filteredData.length}`;
