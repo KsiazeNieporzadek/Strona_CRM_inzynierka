@@ -1,3 +1,19 @@
+// FEP06: ostrzeżenie przed opuszczeniem formularza z niezapisanymi zmianami.
+let vehicleFormIsDirty = false;
+let vehicleFormSubmittedSuccessfully = false;
+
+document.getElementById("addVehicleForm").addEventListener("input", () => {
+  vehicleFormIsDirty = true;
+});
+
+window.addEventListener("beforeunload", (e) => {
+  if (vehicleFormIsDirty && !vehicleFormSubmittedSuccessfully) {
+    e.preventDefault();
+    e.returnValue = "";
+    return "";
+  }
+});
+
 document.getElementById("addVehicleForm").addEventListener("submit", function (e) {
   e.preventDefault();
   let valid = true;
@@ -43,6 +59,7 @@ document.getElementById("addVehicleForm").addEventListener("submit", function (e
   });
 
   if (valid) {
+    vehicleFormSubmittedSuccessfully = true;
     alert("Pojazd został poprawnie dodany!");
     document.getElementById("addVehicleForm").reset();
 
