@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   let data = [];
   let currentPage = 1;
@@ -15,6 +16,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextPageBtn = document.getElementById("nextPage");
   const pageInfo = document.getElementById("pageInfo");
   const exportBtn = document.getElementById("exportCsv");
+
+  // ---- FE01.3 / FEP05: profil klienta + archiwizacja z potwierdzeniem ----
+  const ARCHIVED_KEY = "archivedClientIds";
+  const clientModal = document.getElementById("clientModal");
+  const clientModalBody = document.getElementById("clientModalBody");
+  const archiveClientBtn = document.getElementById("archiveClientBtn");
+  const closeClientModalBtn = document.getElementById("closeClientModal");
+  let currentModalClientId = null;
+
+  function getArchivedIds() {
+    try {
+      return JSON.parse(localStorage.getItem(ARCHIVED_KEY) || "[]");
+    } catch (e) {
+      return [];
+    }
+  }
+  function saveArchivedIds(ids) {
+    localStorage.setItem(ARCHIVED_KEY, JSON.stringify(ids));
+  }
+
+  function openClientModal(client) {
+    currentModalClientId = client.id;
+    clientModalBody.innerHTML = `
+      <p><span class="text-gray-400">ID:</span> ${client.id}</p>
+      <p><span class="text-gray-400">Imię i nazwisko:</span> ${client.firstName} ${client.lastName}</p>
+      <p><span class="text-gray-400">Status:</span> ${client.status || "Brak"}</p>
+      <p><span class="text-gray-400">PESEL:</span> ${client.pesel}</p>
+      <p><span class="text-gray-400">NIP:</span> ${client.nip}</p>
+      <p><span class="text-gray-400">Email:</span> ${client.email}</p>
+      <p><span class="text-gray-400">Telefon:</span> ${client.phone}</p>
+      <p><span class="text-gray-400">Adres:</span> ${client.address}</p>
+    `;
+    clientModal.classList.remove("hidden");
+  }
+
+  function closeClientModal() {
+    clientModal.classList.add("hidden");
+    currentModalClientId = null;
+  }
+
+  closeClientModalBtn.addEventListener("click", closeClientModal);
+
+  archiveClientBtn.addEventListener("click", () => {
+    if (currentModalClientId === null) return;
+    const client = data.find(c => c.id === currentModalClientId);
+    const label = client ? `${client.firstName} ${client.lastName}` : currentModalClientId;
+    const confirmed = confirm(`Czy na pewno chcesz zarchiwizować klienta ${label}? Zniknie on z listy klientów.`);
+    if (!confirmed) return;
+
+    const archived = getArchivedIds();
+    if (!archived.includes(currentModalClientId)) {
+      archived.push(currentModalClientId);
+      saveArchivedIds(archived);
+    }
+    closeClientModal();
+    applyFilter();
+  });
 
   function fetchData() {
     fetch("data/clients.json")
@@ -59,8 +117,20 @@ document.addEventListener("DOMContentLoaded", () => {
         <td class="px-6 py-4">${client.email}</td>
         <td class="px-6 py-4">${client.phone}</td>
         <td class="px-6 py-4">${client.address}</td>
+        <td class="px-6 py-4">
+          <button class="client-details-btn px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-xs" data-id="${client.id}">
+            Szczegóły
+          </button>
+        </td>
       `;
       tbody.appendChild(row);
+    });
+
+    tbody.querySelectorAll(".client-details-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const client = data.find(c => c.id === btn.dataset.id);
+        if (client) openClientModal(client);
+      });
     });
 
     resultCount.textContent = `Liczba wyników: ${filteredData.length}`;
@@ -72,10 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function applyFilter() {
     const query = searchInput.value.toLowerCase();
     const statusQuery = statusFilter.value; // Pobieramy wartość z selecta
+    const archivedIds = getArchivedIds();
 
     const filtered = data.filter(client => {
+      // FE01.3: zarchiwizowani klienci znikają z listy
+      if (archivedIds.includes(client.id)) return false;
+
       // Sprawdzamy wyszukiwanie tekstowe
-      const matchesText = 
+      const matchesText =
         client.firstName.toLowerCase().includes(query) ||
         client.lastName.toLowerCase().includes(query) ||
         client.nip.includes(query);
@@ -177,3 +251,5 @@ statusFilter.addEventListener("change", () => {
   // Pobranie danych na start
   fetchData();
 });
+
+
