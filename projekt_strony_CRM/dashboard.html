@@ -19,11 +19,55 @@
 
   <h1 class="text-3xl font-bold mb-6 text-gray-200">Panel Analityczny</h1>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+  <!-- FE10.2: wybór prezentowanych wskaźników i układu dashboardu -->
+  <div class="bg-tile shadow rounded-xl p-4 mb-6">
+    <div class="flex flex-wrap items-start gap-6">
+      <div>
+        <h2 class="text-sm font-bold mb-2 text-gray-300">Widoczne panele</h2>
+        <div id="tileToggles" class="flex flex-wrap gap-3 text-sm text-gray-300">
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="roiCard" checked> ROI</label>
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="revenueCard" checked> Przychody brutto</label>
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="topClientsCard" checked> Top 10 klientów</label>
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="paymentDelaysCard" checked> Opóźnienia płatności</label>
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="fleetCard" checked> Podsumowanie floty</label>
+          <label class="flex items-center gap-1"><input type="checkbox" class="tile-toggle" data-tile="industryCard" checked> Leasingi w miastach</label>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold mb-2 text-gray-300">Układ dashboardu</h2>
+        <select id="layoutSelect" class="text-sm">
+          <option value="3">3 kolumny</option>
+          <option value="2">2 kolumny</option>
+          <option value="1">1 kolumna</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- FE10.3: filtrowanie danych według przedziału czasu i innych kryteriów -->
+  <div class="bg-tile shadow rounded-xl p-4 mb-6">
+    <div class="flex flex-wrap items-end gap-6">
+      <div>
+        <h2 class="text-sm font-bold mb-2 text-gray-300">Zakres miesięcy (Przychody brutto)</h2>
+        <div class="flex items-center gap-2 text-sm text-gray-300">
+          <span>Od</span>
+          <select id="revenueFromMonth"></select>
+          <span>do</span>
+          <select id="revenueToMonth"></select>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold mb-2 text-gray-300">Miasta (Leasingi w miastach)</h2>
+        <div id="cityFilter" class="flex flex-wrap gap-3 text-sm text-gray-300"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboardGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
     <div class="bg-tile shadow rounded-xl p-6" id="roiCard">
       <p class="text-gray-400">Ładowanie danych ROI...</p>
     </div>
-    <div class="bg-tile shadow rounded-xl p-6">
+    <div class="bg-tile shadow rounded-xl p-6" id="revenueCard">
       <h2 class="text-lg font-bold mb-4 text-gray-200">Przychody brutto</h2>
       <canvas id="revenueChart" height="200"></canvas>
     </div>
@@ -36,12 +80,12 @@
     <div class="bg-tile shadow rounded-xl p-6" id="fleetCard">
       <p class="text-gray-400">Ładowanie danych o flocie...</p>
     </div>
-    <div class="bg-tile shadow rounded-xl p-6">
+    <div class="bg-tile shadow rounded-xl p-6" id="industryCard">
       <h2 class="text-lg font-bold mb-4 text-gray-200">Ilość aktywnych leasingów w miastach</h2>
       <canvas id="industryChart" height="200"></canvas>
     </div>
-    
-    
+
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

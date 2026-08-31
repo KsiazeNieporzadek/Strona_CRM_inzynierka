@@ -44,6 +44,7 @@
           <th class="px-6 py-3 sortable" data-sort="insurance">Ubezpieczenie ⬍</th>
           <th class="px-6 py-3">VIN</th>
           <th class="px-6 py-3 sortable" data-sort="production">Data produkcji ⬍</th>
+          <th class="px-6 py-3">Historia serwisowa</th>
         </tr>
       </thead>
       <tbody id="vehicles-table-body"></tbody>
@@ -54,6 +55,28 @@
     <button id="prevPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Poprzednia</button>
     <span id="pageInfo" class="text-gray-700"></span>
     <button id="nextPage" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700">Następna</button>
+  </div>
+
+  <!-- FE08.3: historia serwisowa pojazdu + dodawanie wpisów -->
+  <div id="serviceModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
+      <h2 class="text-xl font-bold mb-4" id="serviceModalTitle">Historia serwisowa</h2>
+      <ul id="serviceHistoryList" class="space-y-1 text-sm mb-4 max-h-48 overflow-y-auto list-disc list-inside"></ul>
+      <div class="flex flex-wrap gap-2 items-end border-t pt-4">
+        <div>
+          <label class="block text-xs text-gray-600">Data</label>
+          <input type="date" id="serviceEntryDate" class="border rounded-lg px-2 py-1">
+        </div>
+        <div class="flex-grow min-w-[150px]">
+          <label class="block text-xs text-gray-600">Opis wykonanej czynności</label>
+          <input type="text" id="serviceEntryDesc" placeholder="np. Wymiana oleju" class="border rounded-lg px-2 py-1 w-full">
+        </div>
+        <button id="addServiceEntryBtn" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700">Dodaj wpis</button>
+      </div>
+      <div class="mt-6 flex justify-end">
+        <button id="closeServiceModal" class="px-4 py-2 bg-gray-600 text-white rounded-xl hover:bg-gray-700">Zamknij</button>
+      </div>
+    </div>
   </div>
 
   <script src="js/vehicles.js"></script>
