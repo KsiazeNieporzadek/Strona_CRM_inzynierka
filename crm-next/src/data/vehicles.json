@@ -1,0 +1,18 @@
+[
+    { "id": "V001", "brand": "Toyota", "model": "Corolla", "client": "001", "regNumber": "WI12345", "insurance": "2025-06-10", "vin": "JT123456789012345", "production": "2021-03-15" },
+    { "id": "V002", "brand": "Volkswagen", "model": "Golf", "client": "", "regNumber": "KR54321", "insurance": "2025-05-01", "vin": "WV123456789012345", "production": "2020-07-22" },
+    { "id": "V003", "brand": "Ford", "model": "Focus", "client": "003", "regNumber": "PO98765", "insurance": "2025-04-30", "vin": "FO123456789012345", "production": "2019-11-10" },
+    { "id": "V004", "brand": "BMW", "model": "3 Series", "client": "", "regNumber": "GD76543", "insurance": "2025-08-20", "vin": "BM123456789012345", "production": "2022-01-05" },
+    { "id": "V005", "brand": "Audi", "model": "A4", "client": "005", "regNumber": "SZ24680", "insurance": "2025-03-01", "vin": "AU123456789012345", "production": "2021-05-19" },
+    { "id": "V006", "brand": "Hyundai", "model": "i30", "client": "", "regNumber": "KT13579", "insurance": "2025-05-15", "vin": "HY123456789012345", "production": "2022-09-12" },
+    { "id": "V007", "brand": "Kia", "model": "Ceed", "client": "007", "regNumber": "LU86420", "insurance": "2025-07-30", "vin": "KI123456789012345", "production": "2021-04-25" },
+    { "id": "V008", "brand": "Mercedes", "model": "C-Class", "client": "", "regNumber": "OP75319", "insurance": "2025-06-05", "vin": "ME123456789012345", "production": "2020-12-11" },
+    { "id": "V009", "brand": "Renault", "model": "Megane", "client": "009", "regNumber": "RZ15926", "insurance": "2025-04-20", "vin": "RE123456789012345", "production": "2018-08-14" },
+    { "id": "V010", "brand": "Peugeot", "model": "308", "client": "", "regNumber": "PL98765", "insurance": "2025-06-25", "vin": "PE123456789012345", "production": "2019-09-30" },
+    { "id": "V011", "brand": "Opel", "model": "Astra", "client": "011", "regNumber": "OL54321", "insurance": "2025-03-15", "vin": "OP123456789012345", "production": "2020-03-20" },
+    { "id": "V012", "brand": "Nissan", "model": "Qashqai", "client": "", "regNumber": "NS12345", "insurance": "2025-05-10", "vin": "NI123456789012345", "production": "2021-06-18" },
+    { "id": "V013", "brand": "Skoda", "model": "Octavia", "client": "013", "regNumber": "SK86420", "insurance": "2025-06-15", "vin": "SK123456789012345", "production": "2019-01-12" },
+    { "id": "V014", "brand": "Mazda", "model": "3", "client": "", "regNumber": "MZ24680", "insurance": "2025-05-20", "vin": "MA123456789012345", "production": "2018-11-07" },
+    { "id": "V015", "brand": "Honda", "model": "Civic", "client": "015", "regNumber": "HO13579", "insurance": "2025-07-10", "vin": "HO123456789012345", "production": "2022-02-03" }
+  ]
+  

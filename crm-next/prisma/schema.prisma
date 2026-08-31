@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
+
+model Client {
+  id        String    @id
+  firstName String
+  lastName  String
+  pesel     String
+  nip       String?
+  email     String
+  phone     String
+  address   String?
+  status    String
+  archived  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  vehicles  Vehicle[]
+}
+
+model Vehicle {
+  id             String         @id
+  brand          String
+  model          String
+  clientId       String?
+  client         Client?        @relation(fields: [clientId], references: [id])
+  regNumber      String
+  insurance      DateTime
+  insuranceName  String?
+  vin            String
+  production     DateTime
+  createdAt      DateTime       @default(now())
+  serviceEntries ServiceEntry[]
+}
+
+model ServiceEntry {
+  id          Int      @id @default(autoincrement())
+  vehicleId   String
+  vehicle     Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  date        DateTime
+  description String
+}
+
+model Payment {
+  id        Int      @id @default(autoincrement())
+  invoice   String
+  amount    Float
+  delayDays Int      @default(0)
+  clientId  String?
+  createdAt DateTime @default(now())
+}
+
+model UnassignedTransfer {
+  id            Int      @id @default(autoincrement())
+  title         String
+  transferDate  DateTime
+  accountNumber String
+  amount        Float
+  currency      String
+}
+
+model Contract {
+  contractId         String   @id
+  clientName         String
+  clientId           String
+  startDate          DateTime
+  endDate            DateTime
+  financingAmount    Float
+  duration           String
+  monthlyInstallment Float
+  contractValue      Float
+  roi                Float
+  remainingAmount    Float
+}

@@ -1,0 +1,12 @@
+[
+  { "name": "Anna Nowak", "revenue": 50000, "roi": 30, "avgDelay": 2 },
+  { "name": "Jan Kowalski", "revenue": 48000, "roi": 28, "avgDelay": 3 },
+  { "name": "Piotr Zieliński", "revenue": 46000, "roi": 26, "avgDelay": 1 },
+  { "name": "Monika Wójcik", "revenue": 44000, "roi": 27, "avgDelay": 5 },
+  { "name": "Tomasz Grabowski", "revenue": 42000, "roi": 25, "avgDelay": 0 },
+  { "name": "Paweł Dąbrowski", "revenue": 40000, "roi": 24, "avgDelay": 2 },
+  { "name": "Natalia Kaczmarek", "revenue": 38000, "roi": 23, "avgDelay": 4 },
+  { "name": "Krzysztof Kamiński", "revenue": 36000, "roi": 22, "avgDelay": 1 },
+  { "name": "Barbara Zając", "revenue": 34000, "roi": 21, "avgDelay": 3 },
+  { "name": "Andrzej Król", "revenue": 32000, "roi": 20, "avgDelay": 0 }
+]

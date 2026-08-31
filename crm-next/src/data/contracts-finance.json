@@ -1,0 +1,78 @@
+[
+  {
+    "contractId": "CN001",
+    "clientName": "Anna Kowalska",
+    "clientId": "CL001",
+    "startDate": "2023-01-10",
+    "endDate": "2025-01-10",
+    "financingAmount": 30000,
+    "duration": "24 miesiące",
+    "monthlyInstallment": 1250,
+    "contractValue": 31200,
+    "roi": 1200,
+    "remainingAmount": 14000
+  },
+  {
+    "contractId": "CN002",
+    "clientName": "Jan Nowak",
+    "clientId": "CL002",
+    "startDate": "2022-06-01",
+    "endDate": "2024-06-01",
+    "financingAmount": 18000,
+    "duration": "24 miesiące",
+    "monthlyInstallment": 900,
+    "contractValue": 19400,
+    "roi": 1600,
+    "remainingAmount": 6000
+  },
+  {
+    "contractId": "CN003",
+    "clientName": "Magdalena Wiśniewska",
+    "clientId": "CL003",
+    "startDate": "2023-03-15",
+    "endDate": "2026-03-15",
+    "financingAmount": 40000,
+    "duration": "36 miesięcy",
+    "monthlyInstallment": 1250,
+    "contractValue": 45000,
+    "roi": 5000,
+    "remainingAmount": 28000
+  },
+  {
+    "contractId": "CN004",
+    "clientName": "Tomasz Zieliński",
+    "clientId": "CL004",
+    "startDate": "2022-09-20",
+    "endDate": "2024-09-20",
+    "financingAmount": 22000,
+    "duration": "24 miesiące",
+    "monthlyInstallment": 1000,
+    "contractValue": 24000,
+    "roi": 2000,
+    "remainingAmount": 4000
+  },
+  {
+    "contractId": "CN005",
+    "clientName": "Karolina Malinowska",
+    "clientId": "CL005",
+    "startDate": "2024-01-01",
+    "endDate": "2026-01-01",
+    "financingAmount": 35000,
+    "duration": "24 miesiące",
+    "monthlyInstallment": 1458.33,
+    "contractValue": 37500,
+    "roi": 2500,
+    "remainingAmount": 35000
+  },
+{"contractId":"CN006","clientName":"Robert Zając","clientId":"CL006","startDate":"2023-02-01","endDate":"2025-02-01","financingAmount":28000,"duration":"24 miesiące","monthlyInstallment":1166.67,"contractValue":30000,"roi":2200,"remainingAmount":14000},
+{"contractId":"CN007","clientName":"Julia Król","clientId":"CL007","startDate":"2023-07-10","endDate":"2025-07-10","financingAmount":26000,"duration":"24 miesiące","monthlyInstallment":1083.33,"contractValue":27800,"roi":1800,"remainingAmount":9000},
+{"contractId":"CN008","clientName":"Michał Pawlak","clientId":"CL008","startDate":"2022-12-01","endDate":"2024-12-01","financingAmount":34000,"duration":"24 miesiące","monthlyInstallment":1416.67,"contractValue":36500,"roi":2500,"remainingAmount":6000},
+{"contractId":"CN009","clientName":"Kinga Wójcik","clientId":"CL009","startDate":"2023-03-15","endDate":"2025-03-15","financingAmount":20000,"duration":"24 miesiące","monthlyInstallment":833.33,"contractValue":21600,"roi":1600,"remainingAmount":8000},
+{"contractId":"CN010","clientName":"Adam Lis","clientId":"CL010","startDate":"2023-06-20","endDate":"2025-06-20","financingAmount":15000,"duration":"24 miesiące","monthlyInstallment":625.00,"contractValue":16200,"roi":1200,"remainingAmount":3500},
+{"contractId":"CN011","clientName":"Ewa Szymańska","clientId":"CL011","startDate":"2024-01-01","endDate":"2026-01-01","financingAmount":37000,"duration":"24 miesiące","monthlyInstallment":1541.67,"contractValue":39000,"roi":2000,"remainingAmount":37000},
+{"contractId":"CN012","clientName":"Paweł Jankowski","clientId":"CL012","startDate":"2023-05-05","endDate":"2025-05-05","financingAmount":22000,"duration":"24 miesiące","monthlyInstallment":916.67,"contractValue":23400,"roi":1400,"remainingAmount":11000},
+{"contractId":"CN013","clientName":"Natalia Mazur","clientId":"CL013","startDate":"2022-10-01","endDate":"2024-10-01","financingAmount":29000,"duration":"24 miesiące","monthlyInstallment":1208.33,"contractValue":31000,"roi":2000,"remainingAmount":7000},
+{"contractId":"CN014","clientName":"Grzegorz Kowalczyk","clientId":"CL014","startDate":"2023-04-01","endDate":"2025-04-01","financingAmount":31000,"duration":"24 miesiące","monthlyInstallment":1291.67,"contractValue":33400,"roi":2400,"remainingAmount":15500},
+{"contractId":"CN015","clientName":"Zofia Piotrowska","clientId":"CL015","startDate":"2023-09-15","endDate":"2025-09-15","financingAmount":17000,"duration":"24 miesiące","monthlyInstallment":708.33,"contractValue":18200,"roi":1200,"remainingAmount":8500}
+
+]
